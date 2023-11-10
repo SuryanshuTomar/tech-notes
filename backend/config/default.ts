@@ -5,7 +5,7 @@ export type Config = {
 	};
 };
 
-module.exports = {
+export default {
 	server: {
 		port: process.env.PORT ?? 3500,
 		domain: "localhost",
