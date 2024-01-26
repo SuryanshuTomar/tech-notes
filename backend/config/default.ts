@@ -1,7 +1,13 @@
+import dotenv from "dotenv";
+// Configure the dotenv to access the environment variables
+dotenv.config({
+	path: ".env",
+});
+
 export type Config = {
 	server: {
 		connection: {
-			port: string;
+			port: number;
 			domain: string;
 		};
 		middleware: {
@@ -12,7 +18,7 @@ export type Config = {
 			origin: string[];
 		};
 		response: {
-			notFound: "404 Not Found!";
+			notFound: string;
 		};
 	};
 };
@@ -20,12 +26,12 @@ export type Config = {
 const config: Config = {
 	server: {
 		connection: {
-			port: process.env.PORT ?? "3500",
-			domain: "localhost",
+			port: process.env.PORT ?? 8000,
+			domain: process.env.DOMAIN,
 		},
 		cors: {
 			origin: [
-				"http://localhost:3000",
+				process.env.CORS_ORIGIN,
 				"http://www.technotes.com",
 				"http://technotes.com",
 			],
