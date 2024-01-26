@@ -1,9 +1,15 @@
 import { Errback } from "express";
 
-declare namespace NodeJS {
-	interface ProcessEnv {
-		NODE_ENV: "development" | "production" | "test";
-		PORT: number;
+declare global {
+	namespace NodeJS {
+		interface ProcessEnv {
+			NODE_ENV: "development" | "production" | "test";
+			PORT: number;
+			CORS_ORIGIN: string;
+			DOMAIN: string;
+			DBURI: string;
+			DBNAME: string;
+		}
 	}
 }
 
