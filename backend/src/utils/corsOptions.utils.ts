@@ -3,7 +3,8 @@ import { CorsOptions } from "cors";
 import { Config } from "../../config/default";
 
 // Get the Allowed Origin list
-const { origin: allowedOrigins } = config.get<Config["cors"]>("cors");
+const { origin: allowedOrigins } =
+	config.get<Config["server"]["cors"]>("server.cors");
 
 export const corsOptions: CorsOptions = {
 	origin: (origin, callback) => {

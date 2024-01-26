@@ -4,9 +4,17 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import router from "./routes/root";
+import config from "config";
 import { loggerMiddleware } from "./middlewares/logger.middleware";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
 import { corsOptions } from "./utils/corsOptions.utils";
+import { Config } from "../config/default";
+
+// Config data
+const { JSONDataLimit, URLDataLimit } =
+	config.get<Config["server"]["middleware"]>("server.middleware");
+const { notFound } =
+	config.get<Config["server"]["response"]>("server.response");
 
 // Start express app instance
 const app = express();
@@ -18,7 +26,10 @@ app.use(loggerMiddleware);
 app.use(cors(corsOptions));
 
 // BuiltIn Middleware - Json Parser
-app.use(express.json());
+app.use(express.json({ limit: JSONDataLimit })); // limit the json to 16kb data.
+
+// BuiltIn Middleware - Url Encoder
+app.use(express.urlencoded({ extended: true, limit: URLDataLimit })); // extended here means that we can give the data in the url in the nested object form.
 
 // Third Party Middleware - Cookie Parser
 app.use(cookieParser());
@@ -36,9 +47,9 @@ app.all("*", (req: Request, res: Response) => {
 	if (req.accepts("html")) {
 		res.sendFile(path.join(__dirname, "..", "views", "404.html"));
 	} else if (req.accepts("json")) {
-		res.json({ message: "404 Not Found!" });
+		res.json({ message: notFound });
 	} else {
-		res.type("txt").send("404 Not Found!");
+		res.type("txt").send(notFound);
 	}
 });
 

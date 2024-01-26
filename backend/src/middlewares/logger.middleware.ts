@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import logger, { logEvents } from "../utils/logger.utils";
+import { logEvents } from "../utils/logger.utils";
 
 export const loggerMiddleware = (
 	req: Request,
