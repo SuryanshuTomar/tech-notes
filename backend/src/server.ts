@@ -12,8 +12,10 @@ dotenv.config({
 });
 
 // Get the config details for the app.
-const { port, domain } =
-	config.get<Config["server"]["connection"]>("server.connection");
+const {
+	currentEnvironment,
+	connection: { domain, port },
+} = config.get<Config["server"]>("server");
 
 // Start the express app.
 
@@ -38,6 +40,7 @@ const { port, domain } =
 // Method 2 -
 connectDB()
 	.then(() => {
+		logger.info("Environment : " + currentEnvironment);
 		app.listen(port, domain, () => {
 			logger.info(`Server running on port : ${port}`);
 		});

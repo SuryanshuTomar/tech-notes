@@ -10,6 +10,7 @@ export type Config = {
 		dbName: string;
 	};
 	server: {
+		currentEnvironment: "development" | "production" | "test";
 		connection: {
 			port: number;
 			domain: string;
@@ -33,6 +34,7 @@ const config: Config = {
 		dbName: process.env.DB_NAME,
 	},
 	server: {
+		currentEnvironment: process.env.NODE_ENV,
 		connection: {
 			port: process.env.PORT ?? 8000,
 			domain: process.env.DOMAIN,
