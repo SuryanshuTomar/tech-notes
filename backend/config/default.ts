@@ -23,7 +23,10 @@ export type Config = {
 			origin: string[];
 		};
 		response: {
-			notFound: string;
+			notFound: {
+				code: number;
+				message: string;
+			};
 		};
 	};
 };
@@ -51,7 +54,10 @@ const config: Config = {
 			URLDataLimit: "16kb",
 		},
 		response: {
-			notFound: "404 Not Found!",
+			notFound: {
+				code: 404,
+				message: "404 Not Found!",
+			},
 		},
 	},
 };

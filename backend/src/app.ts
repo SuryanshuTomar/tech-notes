@@ -47,9 +47,9 @@ app.all("*", (req: Request, res: Response) => {
 	if (req.accepts("html")) {
 		res.sendFile(path.join(__dirname, "..", "views", "404.html"));
 	} else if (req.accepts("json")) {
-		res.json({ message: notFound });
+		res.json({ message: notFound.message });
 	} else {
-		res.type("txt").send(notFound);
+		res.type("txt").send(notFound.message);
 	}
 });
 
