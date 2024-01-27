@@ -7,8 +7,8 @@ declare global {
 			PORT: number;
 			CORS_ORIGIN: string;
 			DOMAIN: string;
-			DBURI: string;
-			DBNAME: string;
+			DB_URI: string;
+			DB_NAME: string;
 		}
 	}
 }
@@ -17,3 +17,6 @@ export interface Error extends Errback {
 	message: string;
 	stack: string;
 }
+
+
+// Models 

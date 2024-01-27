@@ -5,6 +5,10 @@ dotenv.config({
 });
 
 export type Config = {
+	database: {
+		dbURI: string;
+		dbName: string;
+	};
 	server: {
 		connection: {
 			port: number;
@@ -24,6 +28,10 @@ export type Config = {
 };
 
 const config: Config = {
+	database: {
+		dbURI: process.env.DB_URI,
+		dbName: process.env.DB_NAME,
+	},
 	server: {
 		connection: {
 			port: process.env.PORT ?? 8000,
